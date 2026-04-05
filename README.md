@@ -91,7 +91,7 @@ Request
 npm install
 
 # 2. Configure environment
-cp .env.example .env
+cp .env
 # Open .env and set MONGODB_URI and JWT_SECRET
 
 # 3. (Optional) Seed demo data
@@ -221,7 +221,7 @@ Flip `active` ↔ `inactive`.
 
 ---
 
-#### `GET /api/records` 🔒 All roles
+#### `GET /api/records` All roles
 Paginated list with rich filtering.
 
 | Query param | Type | Default | Description |
