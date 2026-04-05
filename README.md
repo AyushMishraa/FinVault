@@ -64,19 +64,19 @@ Request
 
 | Action | Viewer | Analyst | Admin |
 |---|:---:|:---:|:---:|
-| Register / Login | ✅ | ✅ | ✅ |
-| View own profile | ✅ | ✅ | ✅ |
-| List users | ✅ active only | ✅ active only | ✅ all |
-| Update / toggle any user | ❌ | ❌ | ✅ |
-| **Create** financial record | ❌ | ✅ | ✅ |
-| **View** records | ✅ own | ✅ own | ✅ all |
-| **Update** record | ❌ | ✅ own | ✅ any |
-| **Delete** record (soft) | ❌ | ✅ own | ✅ any |
-| Dashboard summary | ✅ own | ✅ own | ✅ global |
-| Category totals | ✅ own | ✅ own | ✅ global |
-| Recent activity | ✅ own | ✅ own | ✅ global |
-| Monthly trends | ❌ | ✅ own | ✅ global |
-| Weekly trends | ❌ | ✅ own | ✅ global |
+| Register / Login |
+| View own profile |
+| List users | active only | active only | all |
+| Update / toggle any user |
+| **Create** financial record |
+| **View** records | own | own | all |
+| **Update** record | own | any |
+| **Delete** record (soft) | own | any |
+| Dashboard summary | own | own | global |
+| Category totals | own | own | global |
+| Recent activity | own | own | global |
+| Monthly trends | own | global |
+| Weekly trends | own | global |
 
 ---
 
@@ -176,34 +176,34 @@ Response `200`:
 
 ---
 
-#### `GET /api/auth/me`  🔒
+#### `GET /api/auth/me`
 Returns the authenticated user's token payload.
 
 ---
 
 ### Users — `/api/users`
 
-#### `GET /api/users` 🔒
+#### `GET /api/users`
 List users.  Admins see all; others see only active users.
 
-#### `GET /api/users/:id` 🔒
+#### `GET /api/users/:id`
 Get user by ID.  Non-admins can only fetch themselves.
 
-#### `PATCH /api/users/:id` 🔒 Admin only
+#### `PATCH /api/users/:id` Admin only
 Update name, role, or status.
 
 ```json
 { "name": "New Name", "role": "analyst", "status": "inactive" }
 ```
 
-#### `PATCH /api/users/:id/toggle-status` 🔒 Admin only
+#### `PATCH /api/users/:id/toggle-status` Admin only
 Flip `active` ↔ `inactive`.
 
 ---
 
 ### Financial Records — `/api/records`
 
-#### `POST /api/records` 🔒 Analyst, Admin
+#### `POST /api/records` Analyst, Admin
 
 ```json
 {
@@ -252,16 +252,16 @@ Response includes pagination in `meta`:
 
 ---
 
-#### `GET /api/records/:id` 🔒 All roles (owner or Admin)
-#### `PATCH /api/records/:id` 🔒 Analyst (own), Admin (any)
-#### `DELETE /api/records/:id` 🔒 Analyst (own), Admin (any)
+#### `GET /api/records/:id` All roles (owner or Admin)
+#### `PATCH /api/records/:id` Analyst (own), Admin (any)
+#### `DELETE /api/records/:id` Analyst (own), Admin (any)
 Soft-delete — the record is marked `isDeleted: true` and excluded from all future queries automatically.
 
 ---
 
 ### Dashboard — `/api/dashboard`
 
-#### `GET /api/dashboard/summary` 🔒 All roles
+#### `GET /api/dashboard/summary` All roles
 
 Optional query: `?startDate=2024-01-01&endDate=2024-12-31`
 
@@ -280,7 +280,7 @@ Optional query: `?startDate=2024-01-01&endDate=2024-12-31`
 
 ---
 
-#### `GET /api/dashboard/categories` 🔒 All roles
+#### `GET /api/dashboard/categories` All roles
 
 Optional: `?startDate=&endDate=`
 
@@ -295,13 +295,13 @@ Optional: `?startDate=&endDate=`
 
 ---
 
-#### `GET /api/dashboard/recent` 🔒 All roles
+#### `GET /api/dashboard/recent` All roles
 
 Optional: `?limit=10` (max 50)
 
 ---
 
-#### `GET /api/dashboard/trends/monthly` 🔒 Analyst, Admin
+#### `GET /api/dashboard/trends/monthly` Analyst, Admin
 
 Optional: `?months=12`
 
@@ -316,7 +316,7 @@ Optional: `?months=12`
 
 ---
 
-#### `GET /api/dashboard/trends/weekly` 🔒 Analyst, Admin
+#### `GET /api/dashboard/trends/weekly` Analyst, Admin
 
 Optional: `?weeks=8`
 
